@@ -33,14 +33,14 @@ The application is a to-do list manager with a Board and Tasks. The Board is the
 
 ```mermaid
 graph LR
-A[DB] --> B((REPOSITORY))
+A[DB] -- SQL --> B((REPOSITORY))
 B --> D{Service}
 D --> C{Controller}
 C -- HTTP --> F[POSTMAN]
 F -- HTTP --> C
 C --> D
 D --> B
-B --> A
+B -- SQL -->  A
 ```
 
 ### DOCKER CONTAINER setup 
