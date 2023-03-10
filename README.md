@@ -43,3 +43,6 @@ D --> B
 B --> A
 ```
 
+### DOCKER CONTAINER setup 
+in directory find docker-compose file use it for create container with postman database and spring application 
+
