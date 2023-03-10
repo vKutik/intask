@@ -44,5 +44,31 @@ B --> A
 ```
 
 ### DOCKER CONTAINER setup 
-in directory find docker-compose file use it for create container with postman database and spring application 
+In directory find docker-compose file.
+use it for create container with postman database and java application 
 
+
+
+       version: "3.8"  
+      
+    services:  
+      db:  
+        image: 'postgres:13.1-alpine'  
+      container_name: db  
+        ports:  
+          - 5433:5432  
+        environment:  
+          - POSTGRES_USER=postgres  
+          - POSTGRES_PASSWORD=123123  
+      app:  
+        depends_on:  
+          - db  
+        image: kutik9232/intask-app  
+        build: .  
+        ports:  
+          - 8081:8080  
+        environment:  
+          - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres  
+          - SPRING_DATASOURCE_USERNAME=postgres  
+          - SPRING_DATASOURCE_PASSWORD=123123  
+          - SPRING_JPA_HIBERNATE_DDL_AUTO=update
