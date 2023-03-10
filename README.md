@@ -88,4 +88,6 @@ we can do it
 * with connect to db with **Intelij ide** 
 * go to **Docker's terminal** in container db -> 
    `#psql -U postgres` and sql script `INSERT INTO roles VALUES(1, 'USER');`  
-That's all now you can send **HTTP** request for example **POSTMAN client**   
+That's all now you can send **HTTP** request for example **POSTMAN client**  
+
+And the final collection for **POSTMAN** you can find in resourses directory `Intask.postman_collection.json`
