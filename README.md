@@ -7,6 +7,12 @@ The application is a to-do list manager with a Board and Tasks. The Board is the
 
 ### API endpoints  
 
+| HTTP Method | Endpoint        | Description                      | Example                                           |
+|-------------|----------------|----------------------------------|---------------------------------------------------|
+| POST        | /api/v1/register | Register user                    | `{"username": "user", "password": "1234"}` |
+| POST        | /api/v1/auth    | Authenticate user                | `{"username": "user", "password": "1234"}` |
+
+
 | HTTP Method | Endpoint                          | Description                                             |
 | ----------- | -------------------------------- | ------------------------------------------------------- |
 | GET         | /api/v1/boards                   | Get all boards belonging to the authenticated user      |
