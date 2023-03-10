@@ -36,8 +36,8 @@ graph LR
 A[DB] --> B((REPOSITORY))
 B --> D{Service}
 D --> C{Controller}
-C --> F[POSTMAN]
-F --> C
+C -- HTTP --> F[POSTMAN]
+F -- HTTP --> C
 C --> D
 D --> B
 B --> A
