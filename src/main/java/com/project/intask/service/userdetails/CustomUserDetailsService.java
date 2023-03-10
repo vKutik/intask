@@ -1,10 +1,10 @@
-package com.example.test.service.userdetails;
+package com.project.intask.service.userdetails;
 
 import static org.springframework.security.core.userdetails.User.withUsername;
 
-import com.example.test.model.Role;
-import com.example.test.model.User;
-import com.example.test.service.user.UserService;
+import com.project.intask.model.Role;
+import com.project.intask.model.User;
+import com.project.intask.service.user.UserService;
 import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,8 +24,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         User user = userService.getByUsername(username);
 
-        UserBuilder builder =
-            withUsername(user.getUsername())
+        UserBuilder builder = withUsername(user.getUsername())
                 .password(user.getPassword())
                 .roles(user.getRoles().stream().map(Role::getName).toArray(String[]::new));
         return builder.build();

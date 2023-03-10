@@ -1,4 +1,4 @@
-package com.example.test.exceptions;
+package com.project.intask.exceptions;
 
 public class UserAlreadyExistException extends Exception {
 

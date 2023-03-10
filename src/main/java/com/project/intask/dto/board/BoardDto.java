@@ -1,8 +1,7 @@
-package com.example.test.dto.board;
+package com.project.intask.dto.board;
 
-import com.example.test.model.Board;
-import com.example.test.model.Task;
-import com.example.test.model.User;
+import com.project.intask.model.Board;
+import com.project.intask.model.Task;
 import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -19,22 +18,20 @@ public class BoardDto {
     @Size(min = 3)
     private String name;
     private List<Task> tasks;
-    private User user;
+    private String username;
 
     public BoardDto(Board board) {
         this.id = board.getId();
         this.name = board.getName();
         this.tasks = board.getTasks();
-        this.user = board.getUser();
+        this.username = board.getUser().getUsername();
     }
-
 
     public Board toModel() {
         Board board = new Board();
         board.setId(id);
         board.setName(name);
         board.setTasks(tasks);
-        board.setUser(user);
         return board;
     }
 

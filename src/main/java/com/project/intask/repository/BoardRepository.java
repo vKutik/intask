@@ -1,7 +1,6 @@
-package com.example.test.repository;
+package com.project.intask.repository;
 
-
-import com.example.test.model.Board;
+import com.project.intask.model.Board;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

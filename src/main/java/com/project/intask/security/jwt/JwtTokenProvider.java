@@ -1,7 +1,7 @@
-package com.example.test.security.jwt;
+package com.project.intask.security.jwt;
 
-import com.example.test.exceptions.JwtAuthenticationException;
-import com.example.test.model.Role;
+import com.project.intask.exceptions.JwtAuthenticationException;
+import com.project.intask.model.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -22,15 +22,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtTokenProvider {
 
-    @Value("${jwt.token.secret}")
+    @Value("${jwt.token.secret:secret}")
     private String secret;
-    @Value("${jwt.token.expired}")
+    @Value("${jwt.token.expired:3600000}")
     private Long validityTime;
 
     private final UserDetailsService userDetailsService;
 
     public JwtTokenProvider(
-        UserDetailsService userDetailsService) {
+            UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 
@@ -78,11 +78,11 @@ public class JwtTokenProvider {
     }
 
     public boolean validateToken(String token) throws JwtAuthenticationException {
-            Jws<Claims> claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
-            if (claims.getBody().getExpiration().before(new Date())) {
-                throw new JwtAuthenticationException("Failed to validate token");
-            }
-            return true;
+        Jws<Claims> claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
+        if (claims.getBody().getExpiration().before(new Date())) {
+            throw new JwtAuthenticationException("Failed to validate token");
+        }
+        return true;
     }
 
     private Set<String> getRoleNames(Set<Role> roles) {

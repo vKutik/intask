@@ -1,7 +1,7 @@
-package com.example.test.service.task;
+package com.project.intask.service.task;
 
-import com.example.test.model.Task;
-import com.example.test.repository.TaskRepository;
+import com.project.intask.model.Task;
+import com.project.intask.repository.TaskRepository;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

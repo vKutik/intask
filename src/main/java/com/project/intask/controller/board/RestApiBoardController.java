@@ -1,4 +1,4 @@
-package com.project.intask.controller.api.v1.board;
+package com.project.intask.controller.board;
 
 import com.project.intask.dto.board.BoardDto;
 import com.project.intask.dto.task.TaskDto;
@@ -20,17 +20,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/v1/board")
+@RequestMapping("/api/v1/boards")
 public class RestApiBoardController {
 
     private final BoardService boardService;
 
     @GetMapping
     public List<BoardDto> findAll() {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-
         return boardService
-            .getAllBoardsByUsername(username)
+            .getAllBoardsByUsername(getUsernameFromContext())
             .stream()
             .map(BoardDto::new)
             .collect(Collectors.toList());
@@ -38,84 +36,73 @@ public class RestApiBoardController {
 
     @GetMapping("/{id}")
     public BoardDto getByIdBoard(@PathVariable Long id) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return new BoardDto(boardService.getBoardByIdAndUsername(id, username));
+        return new BoardDto(boardService.getBoardByIdAndUsername(id, getUsernameFromContext()));
     }
 
     @PostMapping
     public BoardDto createBoard(@RequestBody @Valid BoardDto boardDto) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-
         return new BoardDto(
-            boardService.createBoardByUsername(boardDto.toModel(), username));
+            boardService.createBoardByUsername(boardDto.toModel(), getUsernameFromContext()));
     }
 
     @DeleteMapping("/{id}")
     public void deleteBoard(@PathVariable Long id) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        boardService.deleteBoardByIdAndUsername(id, username);
+        boardService.deleteBoardByIdAndUsername(id, getUsernameFromContext());
     }
 
     @PutMapping("/{id}")
     public BoardDto updateBoard(@PathVariable Long id,
-        @RequestBody BoardDto boardDto) {
-
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            @RequestBody @Valid BoardDto boardDto) {
 
         Board board = boardDto.toModel();
         board.setId(id);
 
-        return new BoardDto(boardService.updateBoardByIdAndUsername(board, id, username));
+        return new BoardDto(boardService.updateBoardByIdAndUsername(board, id, getUsernameFromContext()));
     }
 
-    @PostMapping("/{id}/task")
+    @PostMapping("/{id}/tasks")
     public BoardDto addTaskToBoard(@PathVariable Long id,
-        @RequestBody TaskDto taskDto) {
-
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            @RequestBody @Valid TaskDto taskDto) {
 
         return new BoardDto(boardService
             .addTaskToBoardByIdAndUsername(
                 id,
                 taskDto.toModel(),
-                username));
+                getUsernameFromContext()));
     }
 
-    @PutMapping("/{boardId}/task/{taskId}")
+    @PutMapping("/{boardId}/tasks/{taskId}")
     public TaskDto updateTaskFromBoard(@PathVariable Long boardId,
-        @PathVariable Long taskId,
-        @RequestBody TaskDto taskDto) {
-
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            @PathVariable Long taskId,
+            @RequestBody @Valid TaskDto taskDto) {
 
         return new TaskDto(boardService
             .updateTaskByBoardIdAndUsernameFromBoard(boardId, taskId, taskDto.toModel(),
-                username));
+                getUsernameFromContext()));
     }
 
-    @GetMapping("/{boardId}/task/{taskId}")
+    @GetMapping("/{boardId}/tasks/{taskId}")
     public TaskDto getTaskByIdFromBoard(@PathVariable Long boardId,
-        @PathVariable Long taskId) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-
+            @PathVariable Long taskId) {
         return new TaskDto(
-            boardService.getTaskByIdAndUsernameFromBoard(boardId, taskId, username));
+            boardService.getTaskByIdAndUsernameFromBoard(boardId, taskId, getUsernameFromContext()));
     }
 
-    @DeleteMapping("/{boardId}/task/{taskId}")
+    @DeleteMapping("/{boardId}/tasks/{taskId}")
     public void deleteTask(@PathVariable Long boardId, @PathVariable Long taskId) {
-
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        boardService.deleteTaskFromBoard(boardId, taskId, username);
+        boardService.deleteTaskFromBoard(boardId, taskId, getUsernameFromContext());
     }
 
-    @GetMapping("/{id}/task")
+    @GetMapping("/{id}/tasks")
     public List<TaskDto> getAllTasksFromBoard(@PathVariable Long id) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
         return boardService
-            .getAllTaskFromBoardByUsername(id, username)
+            .getAllTaskFromBoardByUsername(id, getUsernameFromContext())
             .stream()
             .map(TaskDto::new)
             .collect(Collectors.toList());
+    }
+
+    private String getUsernameFromContext() {
+        return  SecurityContextHolder.getContext().getAuthentication().getName();
     }
 }

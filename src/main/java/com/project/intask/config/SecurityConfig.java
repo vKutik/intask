@@ -1,7 +1,7 @@
-package com.example.test.config;
+package com.project.intask.config;
 
-import com.example.test.security.jwt.JwtConfigurer;
-import com.example.test.security.jwt.JwtTokenProvider;
+import com.project.intask.security.jwt.JwtConfigurer;
+import com.project.intask.security.jwt.JwtTokenProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -14,7 +14,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
 public class SecurityConfig {
@@ -24,7 +23,7 @@ public class SecurityConfig {
     private final JwtTokenProvider jwtTokenProvider;
 
     public SecurityConfig(UserDetailsService userDetailsService,
-        JwtTokenProvider jwtTokenProvider) {
+            JwtTokenProvider jwtTokenProvider) {
         this.userDetailsService = userDetailsService;
         this.jwtTokenProvider = jwtTokenProvider;
     }
@@ -46,26 +45,11 @@ public class SecurityConfig {
             .and()
             .authorizeRequests()
             .antMatchers("/").permitAll()
-            .antMatchers("/home").permitAll()
-            .antMatchers("/register").permitAll()
-            .antMatchers("/register/save").permitAll()
-            .antMatchers("/board").hasRole("USER")
-            .antMatchers("/board/create").hasRole("USER")
-            .antMatchers("/board/save").hasRole("USER")
+            .antMatchers("/api/v1/register").permitAll()
+            .antMatchers("/api/v1/auth").permitAll()
             .antMatchers("/api/v1/board/**").hasRole("USER")
             .anyRequest().permitAll()
             .and()
-            .formLogin(
-                form -> form
-                    .loginPage("/login")
-                    .loginProcessingUrl("/login")
-                    .defaultSuccessUrl("/board")
-                    .permitAll()
-            ).logout(
-                logout -> logout
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .permitAll()
-            )
             .apply(new JwtConfigurer(jwtTokenProvider))
             .and()
             .httpBasic().disable()
@@ -76,7 +60,7 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration)
-        throws Exception {
+            throws Exception {
         return configuration.getAuthenticationManager();
     }
 

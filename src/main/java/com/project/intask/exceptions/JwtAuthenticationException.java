@@ -1,6 +1,4 @@
-package com.example.test.exceptions;
-
-import org.springframework.security.core.AuthenticationException;
+package com.project.intask.exceptions;
 
 public class JwtAuthenticationException extends RuntimeException {
 

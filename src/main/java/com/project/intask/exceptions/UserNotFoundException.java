@@ -1,6 +1,6 @@
-package com.example.test.exceptions;
+package com.project.intask.exceptions;
 
-public class UserNotFoundException extends Exception{
+public class UserNotFoundException extends Exception {
 
     public UserNotFoundException(String message) {
         super(message);

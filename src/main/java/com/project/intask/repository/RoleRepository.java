@@ -1,6 +1,6 @@
-package com.example.test.repository;
+package com.project.intask.repository;
 
-import com.example.test.model.Role;
+import com.project.intask.model.Role;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

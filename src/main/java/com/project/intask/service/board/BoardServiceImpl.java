@@ -1,11 +1,11 @@
-package com.example.test.service.board;
+package com.project.intask.service.board;
 
-import com.example.test.model.Board;
-import com.example.test.model.Task;
-import com.example.test.model.User;
-import com.example.test.repository.BoardRepository;
-import com.example.test.service.task.TaskService;
-import com.example.test.service.user.UserService;
+import com.project.intask.model.Board;
+import com.project.intask.model.Task;
+import com.project.intask.model.User;
+import com.project.intask.repository.BoardRepository;
+import com.project.intask.service.task.TaskService;
+import com.project.intask.service.user.UserService;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -21,12 +21,11 @@ public class BoardServiceImpl implements BoardService {
     private final UserService userService;
 
     public BoardServiceImpl(BoardRepository boardRepository, TaskService taskService,
-        UserService userService) {
+            UserService userService) {
         this.boardRepository = boardRepository;
         this.taskService = taskService;
         this.userService = userService;
     }
-
 
     @Override
     public Board createBoardByUsername(Board board, String username) {
@@ -95,20 +94,20 @@ public class BoardServiceImpl implements BoardService {
         Board board = getBoardByIdAndUsername(boardId, username);
 
         Task task = board
-            .getTasks()
-            .stream()
-            .filter(t -> Objects.equals(t.getId(), taskId))
-            .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException("Task not found"));
+                .getTasks()
+                .stream()
+                .filter(t -> Objects.equals(t.getId(), taskId))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Task not found"));
 
         return taskService.getById(task.getId());
     }
 
     @Override
     public Task updateTaskByBoardIdAndUsernameFromBoard(Long boardId, Long taskId, Task task,
-        String username) {
+            String username) {
         Task taskFromDb = getTaskByIdAndUsernameFromBoard(boardId, taskId,
-            username);
+                username);
         taskFromDb.setName(task.getName());
         taskFromDb.setDescription(task.getDescription());
         taskFromDb.setStatus(task.getStatus());
@@ -118,7 +117,7 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public void deleteTaskFromBoard(Long boardId, Long taskId, String username) {
         Task task = getTaskByIdAndUsernameFromBoard(boardId, taskId,
-            username);
+                username);
         taskService.deleteById(task.getId());
     }
 
@@ -127,7 +126,6 @@ public class BoardServiceImpl implements BoardService {
         Board board = getBoardByIdAndUsername(boardId, username);
         return board.getTasks();
     }
-
 
     private boolean checkUsernameFromBoard(Board board, String username) {
         return Objects.equals(board.getUser().getUsername(), username);

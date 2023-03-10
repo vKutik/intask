@@ -1,7 +1,7 @@
-package com.example.test.dto.task;
+package com.project.intask.dto.task;
 
-import com.example.test.model.Status;
-import com.example.test.model.Task;
+import com.project.intask.model.Status;
+import com.project.intask.model.Task;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -17,6 +17,7 @@ public class TaskDto {
     @Size(min = 4)
     private String name;
     private String description;
+    @NotNull
     private Status status;
 
     public TaskDto(Task task) {

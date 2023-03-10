@@ -1,4 +1,4 @@
-package com.example.test.dto.authentication;
+package com.project.intask.dto.authentication;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,7 +1,7 @@
-package com.example.test.service.role;
+package com.project.intask.service.role;
 
-import com.example.test.model.Role;
-import com.example.test.repository.RoleRepository;
+import com.project.intask.model.Role;
+import com.project.intask.repository.RoleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

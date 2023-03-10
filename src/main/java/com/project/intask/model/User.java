@@ -1,4 +1,4 @@
-package com.example.test.model;
+package com.project.intask.model;
 
 import java.util.Set;
 import javax.persistence.Column;
@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

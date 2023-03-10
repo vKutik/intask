@@ -1,4 +1,4 @@
-package com.example.test.security.jwt;
+package com.project.intask.security.jwt;
 
 import java.io.IOException;
 import javax.servlet.FilterChain;
@@ -18,14 +18,13 @@ public class JwtTokenFilter extends GenericFilterBean {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
-
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
-        FilterChain filterChain) throws ServletException, IOException {
+            FilterChain filterChain) throws ServletException, IOException {
 
         String token = jwtTokenProvider.resolveToken((HttpServletRequest) servletRequest);
 
-        if ( token != null && jwtTokenProvider.validateToken(token)) {
+        if (token != null && jwtTokenProvider.validateToken(token)) {
             Authentication authentication = jwtTokenProvider.getAuthentication(token);
             if (authentication != null) {
                 SecurityContextHolder.getContext().setAuthentication(authentication);

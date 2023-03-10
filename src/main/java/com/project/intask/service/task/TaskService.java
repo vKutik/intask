@@ -1,6 +1,6 @@
-package com.example.test.service.task;
+package com.project.intask.service.task;
 
-import com.example.test.model.Task;
+import com.project.intask.model.Task;
 import java.util.List;
 
 public interface TaskService {

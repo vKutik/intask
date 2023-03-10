@@ -1,8 +1,7 @@
-package com.example.test.dto.user;
+package com.project.intask.dto.user;
 
-import com.example.test.validation.PasswordMatches;
-import com.example.test.model.Role;
-import com.example.test.model.User;
+import com.project.intask.model.Role;
+import com.project.intask.model.User;
 import java.util.Set;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -17,7 +16,6 @@ import lombok.Setter;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-@PasswordMatches
 public class UserDto {
     private Long id;
     @NotEmpty
@@ -26,10 +24,6 @@ public class UserDto {
     @NotNull
     @NotEmpty(message = "Password should not be empty")
     private String password;
-    @NotNull
-    @NotEmpty(message = "Matching password should not be empty")
-    private String matchingPassword;
-
     private Set<Role> roles;
 
     public UserDto(User user) {
@@ -68,9 +62,6 @@ public class UserDto {
         if (!getPassword().equals(userDto.getPassword())) {
             return false;
         }
-        if (!getMatchingPassword().equals(userDto.getMatchingPassword())) {
-            return false;
-        }
         return getRoles().equals(userDto.getRoles());
     }
 
@@ -79,7 +70,6 @@ public class UserDto {
         int result = getId().hashCode();
         result = 31 * result + getUsername().hashCode();
         result = 31 * result + getPassword().hashCode();
-        result = 31 * result + getMatchingPassword().hashCode();
         result = 31 * result + getRoles().hashCode();
         return result;
     }

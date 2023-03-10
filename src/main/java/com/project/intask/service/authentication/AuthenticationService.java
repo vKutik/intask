@@ -1,14 +1,14 @@
-package com.project.intask.service.board.authentication;
+package com.project.intask.service.authentication;
 
-import com.example.test.dto.authentication.AuthenticationRequest;
-import com.example.test.dto.authentication.AuthenticationResponse;
-import com.example.test.dto.authentication.RegisterRequest;
-import com.example.test.exceptions.UserAlreadyExistException;
-import com.example.test.exceptions.UserNotFoundException;
-import com.example.test.model.User;
-import com.example.test.repository.UserRepository;
-import com.example.test.security.jwt.JwtTokenProvider;
-import com.example.test.service.role.RoleService;
+import com.project.intask.dto.authentication.AuthenticationRequest;
+import com.project.intask.dto.authentication.AuthenticationResponse;
+import com.project.intask.dto.authentication.RegisterRequest;
+import com.project.intask.exceptions.UserAlreadyExistException;
+import com.project.intask.exceptions.UserNotFoundException;
+import com.project.intask.model.User;
+import com.project.intask.repository.UserRepository;
+import com.project.intask.security.jwt.JwtTokenProvider;
+import com.project.intask.service.role.RoleService;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,17 +28,17 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request)
-        throws UserAlreadyExistException {
+            throws UserAlreadyExistException {
 
         if (userRepository.getUserByUsername(request.getUsername()).isPresent()) {
             throw new UserAlreadyExistException("Username already exists");
         }
         User newUser = User
-            .builder()
-            .username(request.getUsername())
-            .password(passwordEncoder.encode(request.getPassword()))
-            .roles(Set.of(roleService.getByName("USER")))
-            .build();
+                .builder()
+                .username(request.getUsername())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .roles(Set.of(roleService.getByName("USER")))
+                .build();
 
         userRepository.save(newUser);
 
@@ -51,10 +51,10 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse authentication(AuthenticationRequest request)
-        throws UserNotFoundException {
+            throws UserNotFoundException {
         try {
             authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
+                    new UsernamePasswordAuthenticationToken(
                     request.getUsername(), request.getPassword()
                 ));
         } catch (BadCredentialsException e) {

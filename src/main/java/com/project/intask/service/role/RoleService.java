@@ -1,6 +1,6 @@
-package com.example.test.service.role;
+package com.project.intask.service.role;
 
-import com.example.test.model.Role;
+import com.project.intask.model.Role;
 
 public interface RoleService {
 

@@ -1,9 +1,9 @@
-package com.example.test.service.user;
+package com.project.intask.service.user;
 
-import com.example.test.exceptions.UserAlreadyExistException;
-import com.example.test.model.User;
-import com.example.test.repository.UserRepository;
-import com.example.test.service.role.RoleService;
+import com.project.intask.exceptions.UserAlreadyExistException;
+import com.project.intask.model.User;
+import com.project.intask.repository.UserRepository;
+import com.project.intask.service.role.RoleService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -31,7 +31,6 @@ public class UserServiceImpl implements UserService {
         }
         throw new UserAlreadyExistException("Username was used");
     }
-
 
     @Override
     public User update(User user, Long id) {

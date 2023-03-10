@@ -1,0 +1,391 @@
+{
+	"info": {
+		"_postman_id": "a4d6a32a-de20-4a2c-b5c1-ec8667f319ee",
+		"name": "Intask",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17151218"
+	},
+	"item": [
+		{
+			"name": "loginAndRegister",
+			"item": [
+				{
+					"name": "registration",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"user2\",\r\n    \"password\" : \"321321\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "authentication",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"user2\",\r\n    \"password\" : \"321321\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/v1/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "board",
+			"item": [
+				{
+					"name": "[board]create",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"myboard\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url_adress}}/board",
+							"host": [
+								"{{url_adress}}"
+							],
+							"path": [
+								"board"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[board]get",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "123123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/board/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"board",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[board]update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"newBoard\"\r\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/board/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"board",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[board]findAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/board/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"board",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[board]delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/board/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"board",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "task",
+			"item": [
+				{
+					"name": "[task]create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"go eat\",\r\n    \"description\" : \"go to eat food\"\r\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/board/1/task",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"board",
+								"1",
+								"task"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[task]getById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/board/1/task/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"board",
+								"1",
+								"task",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[task]update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"sex\",\r\n    \"description\" : \"fuck\",\r\n    \"status\" : \"HOLD\"\r\n\r\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/board/1/task/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"board",
+								"1",
+								"task",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[task]getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/board/1/task",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"board",
+								"1",
+								"task"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[task]delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"sex\",\r\n    \"description\" : \"fuck\",\r\n    \"status\" : \"HOLD\"\r\n\r\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/board/1/task/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"board",
+								"1",
+								"task",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOlsiVVNFUiJdLCJpYXQiOjE2Nzg0MDM3MTYsImV4cCI6MTY3ODQwNzMxNn0.W9SjFl8mvQfbCgJt99lRNyi69sVg2x1r6FYFdNdeAww",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url_adress",
+			"value": "localhost:8081",
+			"type": "string"
+		}
+	]
+}

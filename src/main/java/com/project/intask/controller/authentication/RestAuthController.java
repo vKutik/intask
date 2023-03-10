@@ -1,4 +1,4 @@
-package com.project.intask.controller.api.v1.authentication;
+package com.project.intask.controller.authentication;
 
 import com.project.intask.dto.authentication.AuthenticationRequest;
 import com.project.intask.dto.authentication.AuthenticationResponse;
@@ -21,17 +21,16 @@ public class RestAuthController {
 
     private final AuthenticationService authenticationService;
 
-
     @PostMapping("/register")
     public AuthenticationResponse register(@RequestBody @Valid RegisterRequest request)
-        throws UserAlreadyExistException {
+            throws UserAlreadyExistException {
         return authenticationService.register(request);
     }
 
     @PostMapping("/auth")
     public AuthenticationResponse authentication(
-        @RequestBody AuthenticationRequest request)
-        throws UserNotFoundException, AuthenticationException {
+            @RequestBody @Valid AuthenticationRequest request)
+            throws UserNotFoundException, AuthenticationException {
 
         return authenticationService.authentication(request);
     }

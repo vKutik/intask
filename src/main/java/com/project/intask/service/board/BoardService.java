@@ -1,7 +1,7 @@
-package com.example.test.service.board;
+package com.project.intask.service.board;
 
-import com.example.test.model.Board;
-import com.example.test.model.Task;
+import com.project.intask.model.Board;
+import com.project.intask.model.Task;
 import java.util.List;
 
 public interface BoardService {
@@ -24,7 +24,8 @@ public interface BoardService {
 
     Task getTaskByIdAndUsernameFromBoard(Long boardId, Long taskId, String username);
 
-    Task updateTaskByBoardIdAndUsernameFromBoard(Long boardId, Long taskId, Task task, String username);
+    Task updateTaskByBoardIdAndUsernameFromBoard(Long boardId, Long taskId, Task task,
+            String username);
 
     void deleteTaskFromBoard(Long boardId, Long taskId, String username);
 
