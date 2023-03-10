@@ -37,5 +37,9 @@ A[DB] --> B((REPOSITORY))
 B --> D{Service}
 D --> C{Controller}
 C --> F[POSTMAN]
+F --> C
+C --> D
+D --> B
+B --> A
 ```
 
