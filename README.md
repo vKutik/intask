@@ -77,7 +77,7 @@ docker-compose.yaml
           - SPRING_JPA_HIBERNATE_DDL_AUTO=update
 `docker-compose up` command in same directory
 
-After up the container you need insert in table roles value "USER"
+After up the container you need insert in table roles value **"USER"**
 we can do it 
 * with connect to db with **Intelij ide** 
 * go to **Docker's terminal** in container db -> 
