@@ -48,8 +48,11 @@ In directory find docker-compose file.
 use it for create container with postman database and java application 
 
 
+docker-compose.yaml
 
-       version: "3.8"  
+
+
+    version: "3.8"  
       
     services:  
       db:  
