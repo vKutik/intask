@@ -1,7 +1,7 @@
 package com.project.intask.config;
 
-import com.project.intask.security.jwt.JwtConfigurer;
-import com.project.intask.security.jwt.JwtTokenProvider;
+import com.project.intask.jwt.JwtConfigurer;
+import com.project.intask.jwt.JwtTokenProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;

@@ -7,7 +7,7 @@ import com.project.intask.exceptions.UserAlreadyExistException;
 import com.project.intask.exceptions.UserNotFoundException;
 import com.project.intask.model.User;
 import com.project.intask.repository.UserRepository;
-import com.project.intask.security.jwt.JwtTokenProvider;
+import com.project.intask.jwt.JwtTokenProvider;
 import com.project.intask.service.role.RoleService;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;

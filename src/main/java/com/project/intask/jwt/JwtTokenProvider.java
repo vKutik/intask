@@ -1,4 +1,4 @@
-package com.project.intask.security.jwt;
+package com.project.intask.jwt;
 
 import com.project.intask.exceptions.JwtAuthenticationException;
 import com.project.intask.model.Role;

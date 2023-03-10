@@ -1,4 +1,4 @@
-package com.project.intask.security.jwt;
+package com.project.intask.jwt;
 
 import java.io.IOException;
 import javax.servlet.FilterChain;
