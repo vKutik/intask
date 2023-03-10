@@ -81,4 +81,4 @@ After up the container you need insert in table roles value "USER"
 we can do it 
 * with connect to db with Intelij ide 
 * go to Docker's terminal in container db -> 
-   `#psql -U postgres`  
+   `#psql -U postgres` and sql script `INSERT INTO roles VALUES(1, 'USER');`  
