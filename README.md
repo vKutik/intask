@@ -6,13 +6,14 @@ A Spring Boot application is a Java-based web application framework that provide
 The application is a to-do list manager with a Board and Tasks. The Board is the main container that holds the tasks. Each task is a separate entity that can be added, modified, or removed. The Board and Tasks are represented as RESTful resources, with each resource having its own URI.
 
 ### API endpoints  
+####Login and registration users
 
 | HTTP Method | Endpoint        | Description                      | Example                                           |
 |-------------|----------------|----------------------------------|---------------------------------------------------|
 | POST        | /api/v1/register | Register user                    | `{"username": "user", "password": "1234"}` |
 | POST        | /api/v1/auth    | Authenticate user                | `{"username": "user", "password": "1234"}` |
 
-
+####Boards and tasks 
 | HTTP Method | Endpoint                          | Description                                             |
 | ----------- | -------------------------------- | ------------------------------------------------------- |
 | GET         | /api/v1/boards                   | Get all boards belonging to the authenticated user      |
