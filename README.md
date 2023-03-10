@@ -28,3 +28,13 @@ The application is a to-do list manager with a Board and Tasks. The Board is the
 | DELETE      | /api/v1/boards/{boardId}/tasks/{taskId} | Delete a specific task on a specific board for the authenticated user |
 
 
+
+### Architecture
+
+```mermaid
+graph LR
+A[DB] --> B((REPOSITORY))
+B --> D{Service}
+D --> C{Controller}
+```
+
