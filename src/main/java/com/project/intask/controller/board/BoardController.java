@@ -4,6 +4,7 @@ import com.project.intask.dto.board.BoardDto;
 import com.project.intask.dto.task.TaskDto;
 import com.project.intask.model.Board;
 import com.project.intask.service.board.BoardService;
+import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
@@ -21,11 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/boards")
-public class RestApiBoardController {
+public class BoardController {
 
     private final BoardService boardService;
 
     @GetMapping
+    @ApiOperation(value = "get all boards")
     public List<BoardDto> findAll() {
         return boardService
             .getAllBoardsByUsername(getUsernameFromContext())
@@ -35,11 +37,13 @@ public class RestApiBoardController {
     }
 
     @GetMapping("/{id}")
+    @ApiOperation(value = "get board by id")
     public BoardDto getByIdBoard(@PathVariable Long id) {
         return new BoardDto(boardService.getBoardByIdAndUsername(id, getUsernameFromContext()));
     }
 
     @PostMapping
+    @ApiOperation(value = "create a new board")
     public BoardDto createBoard(@RequestBody @Valid BoardDto boardDto) {
         return new BoardDto(
             boardService.createBoardByUsername(boardDto.toModel(), getUsernameFromContext()));
@@ -51,27 +55,32 @@ public class RestApiBoardController {
     }
 
     @PutMapping("/{id}")
+    @ApiOperation(value = "update board by id")
     public BoardDto updateBoard(@PathVariable Long id,
             @RequestBody @Valid BoardDto boardDto) {
 
         Board board = boardDto.toModel();
         board.setId(id);
 
-        return new BoardDto(boardService.updateBoardByIdAndUsername(board, id, getUsernameFromContext()));
+        return new BoardDto(boardService.updateBoardByIdAndUsername(board,
+            id,
+            getUsernameFromContext()));
     }
 
-    @PostMapping("/{id}/tasks")
-    public BoardDto addTaskToBoard(@PathVariable Long id,
+    @PostMapping("/{boardId}/tasks")
+    @ApiOperation(value = "create a new task by board's id")
+    public BoardDto addTaskToBoard(@PathVariable Long boardId,
             @RequestBody @Valid TaskDto taskDto) {
 
         return new BoardDto(boardService
             .addTaskToBoardByIdAndUsername(
-                id,
+                boardId,
                 taskDto.toModel(),
                 getUsernameFromContext()));
     }
 
     @PutMapping("/{boardId}/tasks/{taskId}")
+    @ApiOperation(value = "update task by board's id and task's id")
     public TaskDto updateTaskFromBoard(@PathVariable Long boardId,
             @PathVariable Long taskId,
             @RequestBody @Valid TaskDto taskDto) {
@@ -82,27 +91,32 @@ public class RestApiBoardController {
     }
 
     @GetMapping("/{boardId}/tasks/{taskId}")
+    @ApiOperation(value = "get task by board's id and task's id")
     public TaskDto getTaskByIdFromBoard(@PathVariable Long boardId,
             @PathVariable Long taskId) {
         return new TaskDto(
-            boardService.getTaskByIdAndUsernameFromBoard(boardId, taskId, getUsernameFromContext()));
+            boardService.getTaskByIdAndUsernameFromBoard(boardId,
+                    taskId,
+                    getUsernameFromContext()));
     }
 
     @DeleteMapping("/{boardId}/tasks/{taskId}")
+    @ApiOperation(value = "delete task by board's id and task's id")
     public void deleteTask(@PathVariable Long boardId, @PathVariable Long taskId) {
         boardService.deleteTaskFromBoard(boardId, taskId, getUsernameFromContext());
     }
 
-    @GetMapping("/{id}/tasks")
-    public List<TaskDto> getAllTasksFromBoard(@PathVariable Long id) {
+    @GetMapping("/{boardId}/tasks")
+    @ApiOperation(value = "get all tasks")
+    public List<TaskDto> getAllTasksFromBoard(@PathVariable Long boardId) {
         return boardService
-            .getAllTaskFromBoardByUsername(id, getUsernameFromContext())
+            .getAllTaskFromBoardByUsername(boardId, getUsernameFromContext())
             .stream()
             .map(TaskDto::new)
             .collect(Collectors.toList());
     }
 
     private String getUsernameFromContext() {
-        return  SecurityContextHolder.getContext().getAuthentication().getName();
+        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 }
