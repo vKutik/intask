@@ -2,7 +2,6 @@ package com.project.intask.controller.authentication;
 
 import com.project.intask.dto.authentication.AuthenticationRequest;
 import com.project.intask.dto.authentication.AuthenticationResponse;
-import com.project.intask.dto.authentication.RegisterRequest;
 import com.project.intask.exceptions.UserAlreadyExistException;
 import com.project.intask.exceptions.UserNotFoundException;
 import com.project.intask.service.authentication.AuthenticationService;
@@ -11,18 +10,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1")
 @RequiredArgsConstructor
-public class RestAuthController {
+public class AuthController {
 
     private final AuthenticationService authenticationService;
 
     @PostMapping("/register")
-    public AuthenticationResponse register(@RequestBody @Valid RegisterRequest request)
+    public AuthenticationResponse register(@RequestBody @Valid AuthenticationRequest request)
             throws UserAlreadyExistException {
         return authenticationService.register(request);
     }

@@ -2,12 +2,11 @@ package com.project.intask.service.authentication;
 
 import com.project.intask.dto.authentication.AuthenticationRequest;
 import com.project.intask.dto.authentication.AuthenticationResponse;
-import com.project.intask.dto.authentication.RegisterRequest;
 import com.project.intask.exceptions.UserAlreadyExistException;
 import com.project.intask.exceptions.UserNotFoundException;
+import com.project.intask.jwt.JwtTokenProvider;
 import com.project.intask.model.User;
 import com.project.intask.repository.UserRepository;
-import com.project.intask.jwt.JwtTokenProvider;
 import com.project.intask.service.role.RoleService;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +26,7 @@ public class AuthenticationService {
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse register(RegisterRequest request)
+    public AuthenticationResponse register(AuthenticationRequest request)
             throws UserAlreadyExistException {
 
         if (userRepository.getUserByUsername(request.getUsername()).isPresent()) {
