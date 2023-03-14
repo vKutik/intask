@@ -87,5 +87,6 @@ docker-compose.yaml
 
 You can try **SWAGGER UI** for test endpoints **<adress:port>/swagger-ui/#** 
  - register new user 
- - authenticate user and copy token from response and add to **Authorize** "Bearer token" 
+ - authenticate user and copy token from response and add to **Authorize** "Bearer <<token>>"
+  
 And the final collection for **POSTMAN** you can find in **resourses** directory `Intask.postman_collection.json`
