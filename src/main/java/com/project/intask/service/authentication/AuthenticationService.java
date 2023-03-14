@@ -55,10 +55,11 @@ public class AuthenticationService {
                     request.getUsername(), request.getPassword()
                 ));
         } catch (BadCredentialsException e) {
-            throw new BadCredentialsException("Authentication failed");
+            throw new BadCredentialsException("Incorrect username or password");
         }
 
-        User user = userRepository.getUserByUsername(request.getUsername()).get();
+        User user = userRepository.getUserByUsername(request.getUsername())
+                .orElseThrow(() -> new BadCredentialsException("Incorrect username or password"));
         String token = jwtTokenProvider.createToken(user.getUsername(), user.getRoles());
 
         return AuthenticationResponse.builder()
