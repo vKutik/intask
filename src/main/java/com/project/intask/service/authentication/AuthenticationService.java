@@ -12,6 +12,6 @@ public interface AuthenticationService {
     RegistrationResponse register(RegistrationRequest request) throws UserAlreadyExistException;
 
     AuthenticationResponse authentication(AuthenticationRequest request)
-        throws UserNotFoundException;
+                throws UserNotFoundException;
 
 }
