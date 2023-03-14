@@ -2,6 +2,8 @@ package com.project.intask.controller.authentication;
 
 import com.project.intask.dto.authentication.AuthenticationRequest;
 import com.project.intask.dto.authentication.AuthenticationResponse;
+import com.project.intask.dto.registration.RegistrationRequest;
+import com.project.intask.dto.registration.RegistrationResponse;
 import com.project.intask.exceptions.UserAlreadyExistException;
 import com.project.intask.exceptions.UserNotFoundException;
 import com.project.intask.service.authentication.AuthenticationService;
@@ -19,7 +21,7 @@ public class AuthController {
     private final AuthenticationService authenticationService;
 
     @PostMapping("/register")
-    public AuthenticationResponse register(@RequestBody @Valid AuthenticationRequest request)
+    public RegistrationResponse register(@RequestBody @Valid RegistrationRequest request)
             throws UserAlreadyExistException {
         return authenticationService.register(request);
     }

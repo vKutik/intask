@@ -2,6 +2,8 @@ package com.project.intask.service.authentication;
 
 import com.project.intask.dto.authentication.AuthenticationRequest;
 import com.project.intask.dto.authentication.AuthenticationResponse;
+import com.project.intask.dto.registration.RegistrationRequest;
+import com.project.intask.dto.registration.RegistrationResponse;
 import com.project.intask.exceptions.UserAlreadyExistException;
 import com.project.intask.exceptions.UserNotFoundException;
 import com.project.intask.jwt.JwtTokenProvider;
@@ -26,7 +28,7 @@ public class AuthenticationService {
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse register(AuthenticationRequest request)
+    public RegistrationResponse register(RegistrationRequest request)
             throws UserAlreadyExistException {
 
         if (userRepository.getUserByUsername(request.getUsername()).isPresent()) {
@@ -41,11 +43,7 @@ public class AuthenticationService {
 
         userRepository.save(newUser);
 
-        String token = jwtTokenProvider.createToken(newUser.getUsername(), newUser.getRoles());
-        return AuthenticationResponse
-            .builder()
-            .token(token)
-            .build();
+        return new RegistrationResponse("User successfully registered");
 
     }
 
