@@ -2,6 +2,7 @@ package com.project.intask.jwt;
 
 import com.project.intask.exceptions.JwtAuthenticationException;
 import com.project.intask.model.Role;
+import io.jsonwebtoken.ClaimJwtException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -78,11 +79,12 @@ public class JwtTokenProvider {
     }
 
     public boolean validateToken(String token) throws JwtAuthenticationException {
-        Jws<Claims> claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
-        if (claims.getBody().getExpiration().before(new Date())) {
-            throw new JwtAuthenticationException("Failed to validate token");
+        try {
+            Jws<Claims> claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
+            return !claims.getBody().getExpiration().before(new Date());
+        } catch (ClaimJwtException | IllegalArgumentException e) {
+            throw new JwtAuthenticationException("Failed to validate token", e);
         }
-        return true;
     }
 
     private Set<String> getRoleNames(Set<Role> roles) {

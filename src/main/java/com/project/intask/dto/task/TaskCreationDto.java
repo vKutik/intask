@@ -12,9 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TaskDto {
-
-    private Long id;
+public class TaskCreationDto {
     @NotNull
     @Size(min = 4)
     @ApiModelProperty(notes = "name", example = "shop", required = true)
@@ -25,16 +23,8 @@ public class TaskDto {
     @ApiModelProperty(notes = "status", example = "HOLD", required = true)
     private Status status;
 
-    public TaskDto(Task task) {
-        this.id = task.getId();
-        this.name = task.getName();
-        this.description = task.getDescription();
-        this.status = task.getStatus();
-    }
-
     public Task toModel() {
         Task task = new Task();
-        task.setId(id);
         task.setName(name);
         task.setDescription(description);
         task.setStatus(status);

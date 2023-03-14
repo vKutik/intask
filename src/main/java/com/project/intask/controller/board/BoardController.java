@@ -1,6 +1,8 @@
 package com.project.intask.controller.board;
 
+import com.project.intask.dto.board.BoardCreationDto;
 import com.project.intask.dto.board.BoardDto;
+import com.project.intask.dto.task.TaskCreationDto;
 import com.project.intask.dto.task.TaskDto;
 import com.project.intask.model.Board;
 import com.project.intask.service.board.BoardService;
@@ -8,7 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/boards")
 public class BoardController {
@@ -44,9 +46,11 @@ public class BoardController {
 
     @PostMapping
     @ApiOperation(value = "create a new board")
-    public BoardDto createBoard(@RequestBody @Valid BoardDto boardDto) {
+    public BoardDto createBoard(@RequestBody @Valid BoardCreationDto boardCreationDto) {
         return new BoardDto(
-            boardService.createBoardByUsername(boardDto.toModel(), getUsernameFromContext()));
+            boardService.createBoardByUsername(
+                    boardCreationDto.toModel(),
+                    getUsernameFromContext()));
     }
 
     @DeleteMapping("/{id}")
@@ -70,12 +74,12 @@ public class BoardController {
     @PostMapping("/{boardId}/tasks")
     @ApiOperation(value = "create a new task by board's id")
     public BoardDto addTaskToBoard(@PathVariable Long boardId,
-            @RequestBody @Valid TaskDto taskDto) {
+            @RequestBody @Valid TaskCreationDto taskCreationDto) {
 
         return new BoardDto(boardService
             .addTaskToBoardByIdAndUsername(
                 boardId,
-                taskDto.toModel(),
+                taskCreationDto.toModel(),
                 getUsernameFromContext()));
     }
 
