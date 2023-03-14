@@ -1,6 +1,5 @@
 package com.project.intask.dto.board;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.intask.model.Board;
 import com.project.intask.model.Task;
 import io.swagger.annotations.ApiModelProperty;
@@ -15,16 +14,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BoardDto {
-    @JsonIgnore
+
     private Long id;
     @NotNull
     @Size(min = 3)
     @ApiModelProperty(notes = "name", example = "testBoard", required = true)
     private String name;
 
-    @JsonIgnore
     private List<Task> tasks;
-    @JsonIgnore
+
     private String username;
 
     public BoardDto(Board board) {
